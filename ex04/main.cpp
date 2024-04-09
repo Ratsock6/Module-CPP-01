@@ -44,7 +44,6 @@ void	copy_file(std::ifstream &input, std::ofstream &output, std::string s1, std:
 	size_t			find;
 
 	while (getline(input, line)) {
-		std::cout << line << std::endl;
 		find = line.find(s1, 0);
 		if (find < line.length())
 		{
