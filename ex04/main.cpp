@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:50:27 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/09 00:19:38 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:26:56 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,22 @@ void	copy_file(std::ifstream &input, std::ofstream &output, std::string s1, std:
 	std::string 	line;
 	size_t			find;
 
+	find = 0;
 	while (getline(input, line)) {
-		find = line.find(s1, 0);
-		if (find < line.length())
+		find = line.find(s1, find);
+		do
 		{
-			line.erase(find, s1.length());
-			line.insert(find, s2);
-			output << line << std::endl;
-		}
-		else
-			output << line << std::endl;
+			find = line.find(s1, find);
+			std::cout << "FIND : " << find << std::endl << "IF : " << (find < line.length()) << std::endl;
+			if (find < line.length())
+			{
+				line.erase(find, s1.length());
+				line.insert(find, s2);
+				find += s2.length();
+			}
+		} while (find < line.length());
+		find = 0;
+		output << line << std::endl;
 	}
 }
 
